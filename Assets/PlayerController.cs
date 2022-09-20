@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject groundChecker;
     public LayerMask whatIsGround; 
-
+    public float dashMultiplier = 3.0f;
     public float maxSpeed = 5.0f;
     public float jumpForce = 100.0f;
     public bool isOnGround= false;  
@@ -32,13 +32,17 @@ public class PlayerController : MonoBehaviour
 
         isOnGround = Physics2D.OverlapCircle(groundChecker.transform.position, 1.0f, whatIsGround);
         
-        if (Input.GetKeyDown(KeyCode.Space) &&  isOnGround == true)
+        //Sprint or Dash
+       
+        //Jump
+        if (Input.GetKeyDown(KeyCode.Space) && isOnGround == true)
         {
             playerObject.AddForce(new Vector2(0.0f, 2.5f) * jumpForce);
         }
+        //Double Jump
         if (Input.GetKeyDown(KeyCode.Space) &&  isOnGround == false)
         {
-            playerObject.AddForce(new Vector2(0.0f, 100.0f));
+            playerObject.AddForce(new Vector2(0.0f, 2.0f) * jumpForce);
         }
     }
 }
