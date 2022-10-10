@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 100.0f;
     public bool isOnGround = false;  
     bool doubleJump = true; 
+    bool death = false;
     //reference to Rigid body to allow it to be maipulated
     Rigidbody2D playerObject;
     float movementValueX = 1.0f;
@@ -34,6 +35,16 @@ public class PlayerController : MonoBehaviour
         isOnGround = Physics2D.OverlapCircle(groundChecker.transform.position, 1.0f, whatIsGround);
         
         //Speed
+        if (maxSpeed < 6.0f)
+       {if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            maxSpeed = maxSpeed * 1.5f;
+        }
+       }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            maxSpeed = maxSpeed / 1.5f;
+        }
        
         //Jump
         if (Input.GetKeyDown(KeyCode.UpArrow) && isOnGround == true)
@@ -50,6 +61,7 @@ public class PlayerController : MonoBehaviour
         {
             doubleJump = true;
         }
+
         
     }
 }
